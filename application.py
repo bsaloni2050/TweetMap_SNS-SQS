@@ -16,7 +16,7 @@ thread = None
 
 
 # Auth credentials
-awsauth = AWS4Auth('AKIAIIICA2PQJ4WGZ3UQtyui', 'bEu3lDOPlbkEj1r6LHOP5VAZA78ctPNWK0SJ64xG','us-west-2', 'es')
+awsauth = AWS4Auth('', '','us-west-2', 'es')
 host = 'http://127.0.0.1:5000/'
 
 # Connect to elasticsearch
@@ -79,8 +79,8 @@ def processinput():
 		json_data = json.loads(request.data.decode('utf-8'))
 		# if SubscriptionConfirmation then send confirm response back to SNS
 		if  resp =="SubscriptionConfirmation":
-			client = boto3.client('sns',aws_access_key_id= 'AKIAIIICA2PQJ4WGZ3UQtyui',
-                        aws_secret_access_key = 'bEu3lDOPlbkEj1r6LHOP5VAZA78ctPNWK0SJ64xG',
+			client = boto3.client('sns',aws_access_key_id= '',
+                        aws_secret_access_key = '',
                         region_name = 'us-west-2')
 			token = json_data['Token']
 			response = client.confirm_subscription(
@@ -91,8 +91,8 @@ def processinput():
 			return "Subscription confirmed!"
 		elif resp == "Notification":
 			message = json_data['Message']
-			client = boto3.client('sns',aws_access_key_id= 'AKIAIIICA2PQJ4WGZ3UQtyui',
-                        aws_secret_access_key = 'bEu3lDOPlbkEj1r6LHOP5VAZA78ctPNWK0SJ64xG',
+			client = boto3.client('sns',aws_access_key_id= '',
+                        aws_secret_access_key = '',
                         region_name = 'us-west-2')
 			msg_data = json.loads(message)
 			msgid = str(msg_data['id'])
@@ -115,8 +115,8 @@ def responsive():
 		useragent = request.headers.get('User-Agent')
 		json_data = json.loads(request.data.decode('utf-8'))
 		if  resp =="SubscriptionConfirmation":
-			client = boto3.client('sns',aws_access_key_id= 'AKIAIIICA2PQJ4WGZ3UQtyui',
-                        aws_secret_access_key = 'bEu3lDOPlbkEj1r6LHOP5VAZA78ctPNWK0SJ64xG',
+			client = boto3.client('sns',aws_access_key_id= '',
+                        aws_secret_access_key = '',
                         region_name = 'us-west-2')
 			token = json_data['Token']
 			response = client.confirm_subscription(
@@ -127,8 +127,8 @@ def responsive():
 			return render_template("index.html",data = "Sucbscription Confirmed")
 		elif resp == "Notification":
 			message = json_data['Message']
-			client = boto3.client('sns',aws_access_key_id= 'AKIAIIICA2PQJ4WGZ3UQtyui',
-                        aws_secret_access_key = 'bEu3lDOPlbkEj1r6LHOP5VAZA78ctPNWK0SJ64xG',
+			client = boto3.client('sns',aws_access_key_id= '',
+                        aws_secret_access_key = '',
                         region_name = 'us-west-2')
 			# send message through socket for real time processing
 			socketio.emit('my_response',{'data': message})
