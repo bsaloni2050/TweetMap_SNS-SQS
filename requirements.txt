@@ -10,7 +10,7 @@ oauthlib==2.0.0
 pathspec==0.3.4
 python-dateutil==2.5.3
 python-twitter==3.1
-PyYAML==3.12
+PyYAML==5.4
 requests==2.9.1
 requests-aws4auth==0.9
 requests-oauthlib==0.7.0
